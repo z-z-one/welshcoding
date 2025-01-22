@@ -1,0 +1,37 @@
+#port
+server:
+  port: 9090
+
+#error
+  error:
+    whitelabel:
+      enabled: false           # 화이트 라벨 페이지 유무 (default : true) 
+    include-stacktrace: never # 오류 응답에 stacktrace 내용을 포함할 지 여부 (default : always)
+    path: /error  
+
+
+#DB Connection
+spring:
+  datasource:
+    url: ${url}
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: ${username}
+    password: ${password}
+   
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
+        show_sql: true
+        format_sql: true
+        
+  thymeleaf:
+    cache: false
+ 
+logging.level:
+  org:
+    hibernate:
+      SQL: debug
+      type: debug  
