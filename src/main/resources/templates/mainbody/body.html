@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>welshcoding</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/4.0.2/autosize.min.js"></script>
+	<script src="/body1/boardScript.js"></script>
+    <link th:href="@{/css/headerStyle.css}" rel="stylesheet">
+    <link th:href="@{/css/mainbody.css}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/seriesStyle.css">
+    <link th:href="@{/css/footerStyle.css}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/introduce.css">
+</head>
+
+<!-- 
+ajax검색기능
+https://developeryoung.tistory.com/39 -->
+
+
+<body style="width: 100% !important;" >
+<div id="header" th:replace="fragments/header :: header"></div>
+<br><br><br>
+<div class="wholebody">
+    <div class="mainbody">
+        <div class="subbody">
+            <div class="mainbody_head">
+                <img class="mainImg" onerror="this.src='/css/imgs/corgi.png'" th:src="@{${recentMember.profileImg}}">
+                <div>
+                    <h3 th:text="${recentMember.userName}">지원</h3>
+                    <p th:text="${recentMember.userBio}">hello world..</p>
+                </div>
+            </div>
+            <hr class="hr1">
+            <div class="mainbody_social">
+	            <th:block th:if="${recentMember != null and recentMember.sns != null and recentMember.sns.userGithub != null and recentMember.sns.userGithub != ''}">
+				    <a href="#" th:href="@{${recentMember.sns.userGithub}}" id="github">
+				    	<img class="socialIcon" src="/body1/imgs/githubIcon.png">
+				    </a>
+				</th:block>
+				<th:block th:if="${recentMember != null and recentMember.sns != null and recentMember.sns.userTwitter != null and recentMember.sns.userTwitter != ''}">
+				    <a href="#" th:href="@{${recentMember.sns.userTwitter}}" id="twitter">
+				    	<img class="socialIcon" src="/body1/imgs/twiterIcon.png">
+				    </a>
+				</th:block>
+				<th:block th:if="${recentMember != null and recentMember.sns != null and recentMember.sns.userFacebook != null and recentMember.sns.userFacebook != ''}">
+				    <a href="#" th:href="@{${recentMember.sns.userFacebook}}" id="facebook">
+				    	<img class="socialIcon" src="/body1/imgs/facebookIcon.png">
+				    </a>
+				</th:block>
+				<th:block th:if="${recentMember != null and recentMember.sns != null and recentMember.sns.userHomepage != null and recentMember.sns.userHomepage != ''}">
+				    <a href="#" th:href="@{${recentMember.sns.userHomepage}}" id="homepage">
+				    	<img class="socialIcon" src="/body1/imgs/home-icon.png">
+				    </a>
+				</th:block>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <ul class="tab-container">
+        <li class="tab-container__item active" data-tab="tab1">
+            <a class="tab-container__item--title" href="#">글</a>
+        </li>
+        <li class="tab-container__item" data-tab="tab2">
+            <a class="tab-container__item--title" href="#">시리즈</a>
+        </li>
+        <li class="tab-container__item" data-tab="tab3">
+            <a class="tab-container__item--title" href="#">소개</a>
+        </li>
+
+    </ul>
+    <section class="content-container">
+        <article id="tab1" class="content-container__content target">
+            <div class="taglistdiv">
+                <!-- 태그목록 -->
+                <p style="padding: 3px; margin: 5px;">태그 목록</p>
+                <hr style="margin: 5px;">
+                <ul>
+                    <li>
+                        <button id="tagall" class="tagall"
+                                style="background-color: #00ff0000; border: none; color:#20c997; "
+                                onclick="showall()">전체보기
+                        </button>
+                    </li>
+                    <li th:each="newtag : ${alltags}" class="tagPar">
+                        <button th:id="'tagsId'+${newtag.tagsId}" class="taglist" th:text="${newtag.tagsName}" 
+                                style="background-color: #00ff0000; border: none;"></button>
+                    </li>
+                </ul>
+            </div>
+            <div class="searchArea">
+                <!-- 검색창 -->
+                <fieldset class="search">
+                    <img src="/header/imgs/search.png" style="width: 8%; margin: 3px; opacity: 0.5;">
+                    <input id="inputSearch" type="text" placeholder="검색어를 입력하세요." onkeydown="search(event)"
+                           style="border: none; outline: none; width: 80%; text-align: center; margin: 1px;">
+                </fieldset>
+            </div>
+
+            <!-- 게시물 목록 -->
+            <div th:each="board: ${boards}" class="postArea" th:id="'boardId'+${board.boardId}">
+                <br>
+                <h1 th:text="${board.boardTitle}" class="postH1" th:onclick="|goPost('${board.boardId}')|"></h1>
+                <p class="postCont" th:text="${board.boardIntro}"> </p>
+                <div class="tags">
+                    <button class="tagBtn" th:each="tag: ${board.tags}" th:text="${tag.tagsName}"></button>
+                </div>
+                <p class="postDay" th:text="${board.boardDate}"></p>
+            </div>
+
+        </article>
+        <article id="tab2" class="content-container__content">
+            <div th:replace="series/series :: series"></div>
+
+        </article>
+        <article id="tab3" class="content-container__content">
+            <div id="introduce" th:replace="introduce/body :: intro"></div>
+        </article>
+    </section>
+</div>
+<div id="footer" th:replace="fragments/footer :: footer"></div>
+</body>
+<script type="text/javascript">
+
+const tabItem = document.querySelectorAll(".tab-container__item");
+const tabContent = document.querySelectorAll(".content-container__content");
+
+tabItem.forEach((item) => {
+    item.addEventListener("click", tabHandler);
+});
+
+//tab메뉴
+function tabHandler(item) {
+    const tabTarget = item.currentTarget;
+    const target = tabTarget.dataset.tab;
+    tabItem.forEach((title) => {
+        title.classList.remove("active");
+    });
+    tabContent.forEach((target) => {
+        target.classList.remove("target");
+    });
+    document.querySelector("#" + target).classList.add("target");
+    tabTarget.classList.add("active");
+}
+
+const buttons = document.querySelectorAll('.taglist');
+const tagall = document.querySelector('.tagall'); // 첫 번째 .tagall 요소 선택
+
+tagall.addEventListener('click', function() {
+    buttons.forEach(btn => {
+        btn.style.color = '#000000';
+    });
+    tagall.style.color = '#20c997';
+});
+
+buttons.forEach(button => {
+    button.addEventListener('click', function() {
+        // 모든 버튼의 배경색을 회색으로 변경
+        buttons.forEach(btn => {
+            btn.style.color = '#000000';
+            tagall.style.color = '#000000';
+        });
+        // 클릭한 버튼의 배경색을 초록색으로 변경
+        button.style.color = '#20c997';
+        
+        var seltag = button.textContent;
+        var postAreas = document.getElementsByClassName("postArea");
+        for (var i = 0; i < postAreas.length; i++) {
+            var tagBtns = postAreas[i].querySelectorAll(".tags button");
+            postAreas[i].style.display = "none";
+            for (var j = 0; j < tagBtns.length; j++) {
+                if (tagBtns[j].textContent === seltag) {
+                    postAreas[i].style.display = "block";
+                    break;
+                }
+            }
+        }
+    });
+});
+</script>
+
+<script th:inline="javascript">
+    var github = document.getElementById("github");
+    var twitter = document.getElementById("twitter");
+    var facebook = document.getElementById("facebook");
+    var homepage = document.getElementById("homepage");
+    var sns = /*[[${recentMember.sns}]]*/ '';
+    var link = document.getElementById("git");
+    if (sns.userGithub.trim() == "" || sns.userGithub == null || sns.userGithub == "입력된 Github 링크가 없습니다.") {
+        github.style.display = "none";
+    }
+    if (sns.userTwitter.trim() == "" || sns.userTwitter == null || sns.userTwitter == "입력된 Twitter 링크가 없습니다.") {
+        twitter.style.display = "none";
+    }
+    if (sns.userFacebook.trim() == "" || sns.userFacebook == null || sns.userFacebook == "입력된 Facebook 링크가 없습니다.") {
+        facebook.style.display = "none";
+    }
+    if (sns.userHomepage.trim() == "" || sns.userHomepage == null || sns.userHomepage == "입력된 개인 홈페이지 링크가 없습니다.") {
+        homepage.style.display = "none";
+    }
+</script>
+
+</html>
+
+
+

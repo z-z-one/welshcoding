@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="stylesheet" type="text/css" href="/css/seriesStyle.css">
+	
+</head>
+<body>
+<div th:if="${seriesSize}" class="listdiv" th:fragment="series">
+	<div class="serieslist" th:each="series : ${seriesList}">
+		<a class="seriesatag" href="/kdy/seriesDetail.html" th:href="@{|/series/${memberId}/${series.seriesId}|}">
+			<div class="serieslistdiv">
+				<img class="seriesimg" src="/kdy/imgs/test.jpg" 
+				onerror="this.src='/kdy/imgs/noImage.png'"
+				th:src="${series.seriesImgUrl}" >
+			</div>
+		</a>
+		<h4 class="titleh4tag">
+			<a href="#" th:href="@{|/series/${memberId}/${series.seriesId}|}" th:text="${series.seriesName}">spring-boot 교육과정</a>
+		</h4>
+		<div>
+			<span th:text="|${series.boardCnt}개의 포스터|"></span>
+			<span>·</span>
+			<span th:text="|마지막 업데이트 ${series.updateDateToNow}일 전|"></span>
+		</div>
+	</div>
+</div>
+<div th:if="${!seriesSize}" class="empty"  th:fragment="series">
+	<img src="/kdy/imgs/noSeires.png" alt="list is empty">
+	<div class="message">시리즈가 없습니다.</div>
+</div>
+</body>
+</html>
