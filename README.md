@@ -1,14 +1,31 @@
 # Welshcoding
 </br>
-Spring Boot 를 활용한 웹 개발 프로젝트 입니다.</br></br>
 
-- 배포된 프로젝트 바로가기 : <a  href="https://port-0-welshcoding-rm6l2llvw6yzvu.sel5.cloudtype.app/" target="_blank"> Welshcoding 새창으로 열기</a>
-- 노션에서 프로젝트 설명 보기 : <a  href="https://miniature-globe-4cc.notion.site/Spring-Boot-Welshcoding-184178242f938015b0a5d9f8a1688e14" target="_blank"> Welshcoding 노션 새창으로 열기</a>
+velog를 레퍼런스로한 SpringBoot 프로젝트입니다.
 
+</br>
+
+### 프로젝트 설명
+
+- <a  href="https://miniature-globe-4cc.notion.site/Spring-Boot-Welshcoding-184178242f938015b0a5d9f8a1688e14" target="_blank"> 프로젝트 설명 노션 바로가기 링크</a> : 개발 과정과 자세한 설명을 확인 할 수 있습니다.
 
 </br></br>
----
-</br></br>
+
+### Welshcoding 배포 사이트
+
+- <a  href="https://port-0-welshcoding-rm6l2llvw6yzvu.sel5.cloudtype.app/" target="_blank"> Welshcoding 배포된 싸이트 바로가기</a> : 개발된 프로젝트를 직접 체험 할 수 있습니다.
+    - DB 배포 : AWS
+    - 프로젝트 배포 : cloudtype
+    - DB연결정보는 깃허브에 올리지 않았습니다.(변수처리) - application.yaml
+
+
+
+
+</br> 
+
+------ 
+
+</br></br> 
 
 ### 프로젝트 소스 구조
 
