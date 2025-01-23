@@ -13,7 +13,7 @@ velog를 레퍼런스로한 SpringBoot 프로젝트입니다.
 
 ### Welshcoding 배포 사이트
 
-- <a  href="https://port-0-welshcoding-rm6l2llvw6yzvu.sel5.cloudtype.app/" target="_blank"> Welshcoding 배포된 싸이트 바로가기</a> : 개발된 프로젝트를 직접 체험 할 수 있습니다.
+- <a  href="https://port-0-welshcoding-rm6l2llvw6yzvu.sel5.cloudtype.app/" target="_blank"> Welshcoding 배포된 싸이트 바로가기</a> : 개발된 프로젝트를 직접 체험 할 수 있습니다.  <sub style="color: gray;">반응형이 아니여서 기기에 따라 불편 할 수 있습니다,,</sub >
     - DB 배포 : AWS
     - 프로젝트 배포 : cloudtype
     - DB연결정보는 깃허브에 올리지 않았습니다.(변수처리) - application.yaml
